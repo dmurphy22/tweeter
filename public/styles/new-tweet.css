@@ -53,3 +53,7 @@ form button {
   color:white;
   padding: 10px 20px 10px 20px;
 }
+
+.negative {
+  color: red;
+}
