@@ -52,13 +52,12 @@ form button {
   background-color: blue;
   margin-bottom: 20px;
   color: white;
-  padding: 10px 20px 10px 20px;
+  padding: 10px 20px;
 }
 
 .negative {
   color: red;
 }
-
 
 .tweet {
   display: flex;
@@ -69,8 +68,8 @@ form button {
   margin: 0 auto;
 }
 
-.tweet:hover{
-  box-shadow: 15px 15px 0px -5px rgba(203,203,203,0.6);
+.tweet:hover {
+  box-shadow: 15px 15px 0px -5px rgba(203, 203, 203, 0.6);
 }
 
 #header {
@@ -81,8 +80,8 @@ form button {
 
 #header img {
   margin-right: 10px;
-  min-width: 100px; /* Adjust the minimum width as needed */
-  max-width: 100px; /* Adjust the minimum width as needed */
+  min-width: 100px;
+  max-width: 100px;
   height: auto;
 }
 
@@ -90,7 +89,12 @@ form button {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 92%
+  width: 92%;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+.user-info span {
+  color: rgb(166, 163, 163);
 }
 
 .tweet-content {
@@ -100,18 +104,18 @@ form button {
 
 #footer {
   display: flex;
-  align-items: flex-start; 
+  align-items: flex-start;
 }
 
 #footer #icons {
   width: 90%;
   display: flex;
-  justify-content: end;
-  align-items: end;
+  justify-content: flex-end;
+  align-items: flex-end;
   text-decoration: none;
 }
 
-#footer a{
+#footer a {
   margin-left: 10px;
 }
 
