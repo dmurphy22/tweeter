@@ -27,7 +27,7 @@ form label {
   font-family: 'Source Sans Pro', sans-serif;
   font-weight: 600;
   padding-bottom: 10px;
-  margin-bottom: 10px; 
+  margin-bottom: 10px;
 }
 
 #tweet-text {
@@ -39,21 +39,84 @@ form label {
   color: #000000;
   border-style: solid;
   border-radius: 0px;
-  box-shadow: 0px 0px 5px rgba(66,66,66,.75);
+  box-shadow: 0px 0px 5px rgba(66, 66, 66, .75);
   resize: none;
 }
 
 #tweet-text:focus {
-  outline:none;
+  outline: none;
 }
 
 form button {
   font-family: 'Bungee', cursive;
   background-color: blue;
-  color:white;
+  margin-bottom: 20px;
+  color: white;
   padding: 10px 20px 10px 20px;
 }
 
 .negative {
   color: red;
+}
+
+
+.tweet {
+  display: flex;
+  flex-direction: column;
+  border: 5px solid black;
+  padding: 10px;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.tweet:hover{
+  box-shadow: 15px 15px 0px -5px rgba(203,203,203,0.6);
+}
+
+#header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+#header img {
+  margin-right: 10px;
+  min-width: 100px; /* Adjust the minimum width as needed */
+  max-width: 100px; /* Adjust the minimum width as needed */
+  height: auto;
+}
+
+.user-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 92%
+}
+
+.tweet-content {
+  margin-bottom: 10px;
+  border-bottom: 5px solid black;
+}
+
+#footer {
+  display: flex;
+  align-items: flex-start; 
+}
+
+#footer #icons {
+  width: 90%;
+  display: flex;
+  justify-content: end;
+  align-items: end;
+  text-decoration: none;
+}
+
+#footer a{
+  margin-left: 10px;
+}
+
+.like-icon:hover,
+.retweet-icon:hover,
+.comment-icon:hover {
+  color: rgb(210, 156, 113);
 }
