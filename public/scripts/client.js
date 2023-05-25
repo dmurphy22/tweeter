@@ -36,39 +36,46 @@ $(document).ready(() => {
   });
 
   const showResult = function(message, err = false) {
-    const $errorMessage = err ? $('<p class="negative">').addClass('tweet-message').text(message) : $('<p>').addClass('tweet-message').text(message);
-    $('form').append($errorMessage);
+    const $errorMessage = err ? $('<p>').addClass('tweet-message').addClass('err').text(message) : $('<p>').addClass('tweet-message').addClass('pos').text(message);
+    $('#feedback').append($errorMessage);
   };
 
   const clearMessage = function() {
     $('form').find('.tweet-message').remove();
   };
 
+  const escape = function(str) {
+    const div = document.createElement('div');
+    div.appendChild(document.createTextNode(str));
+    return div.innerHTML;
+  };
+
   const createTweetElement = function(tweet) {
     const user = tweet.user;
     const content = tweet.content;
 
-    let $article = `
-    <article class="tweet">
-      <div id="header">
-        <img src="${user.avatars}" alt="Profile Picture">
-        <div class="user-info">
-          <h5>${user.name}</h5>
-          <span>${user.handle}</span>
+    const $article = $(`
+      <article class="tweet">
+        <div id="header">
+          <img src="${escape(user.avatars)}" alt="Profile Picture">
+          <div class="user-info">
+            <h5>${escape(user.name)}</h5>
+            <span>${escape(user.handle)}</span>
+          </div>
         </div>
-      </div>
-      <div class="tweets-content">
-        <p>${content.text}</p>
-      </div>
-      <div id="footer">
-        <time class="timeago" datetime="${tweet.created_at}"></time>
-        <div id="icons">
-          <a href="#" class="like-icon"><i class="fa-solid fa-flag"></i></a>
-          <a href="#" class="retweet-icon"><i class="fas fa-retweet"></i></a>
-          <a href="#" class="comment-icon"><i class="fa-solid fa-heart"></i></a>
+        <div class="tweets-content">
+          <p>${escape(content.text)}</p>
         </div>
-      </div>
-    </article>`;
+        <div id="footer">
+          <time class="timeago" datetime="${escape(tweet.created_at)}"></time>
+          <div id="icons">
+            <a href="#" class="like-icon"><i class="fa-solid fa-flag"></i></a>
+            <a href="#" class="retweet-icon"><i class="fas fa-retweet"></i></a>
+            <a href="#" class="comment-icon"><i class="fa-solid fa-heart"></i></a>
+          </div>
+        </div>
+      </article>
+    `);
 
     return $article;
   };

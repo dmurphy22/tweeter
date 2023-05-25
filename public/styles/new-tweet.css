@@ -55,6 +55,24 @@ form button {
   padding: 10px 20px;
 }
 
+.tweet-message{
+  font-family: 'Source Sans Pro', sans-serif;
+  padding: .5em 1em;
+}
+
+.tweet-message.err{
+
+  border: 5px solid red;
+  color: red;
+
+}
+
+.tweet-message.pos{
+
+  border: 5px solid green;
+
+}
+
 .negative {
   color: red;
 }
