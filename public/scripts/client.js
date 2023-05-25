@@ -1,92 +1,105 @@
-/*
- * Client-side JS logic goes here
- * jQuery is already loaded
- * Reminder: Use (and do all your DOM work in) jQuery's document ready function
- */
-
 $(document).ready(() => {
   console.log("Ready");
+
+  $('form').submit(function(event) {
+    event.preventDefault();
+
+    const $form = $(this);
+    const formData = $form.serialize();
+    const tweetContent = $form.find('textarea[name="text"]').val().trim();
+
+    clearMessage();
+
+    if (tweetContent === '') {
+      showResult("Tweet content cannot be empty", true);
+    } else if (tweetContent.length > 140) {
+      showResult("Tweet content exceeds the maximum character limit of 140", true);
+    } else {
+      $.ajax({
+        url: '/tweets',
+        type: 'POST',
+        data: formData,
+        success: function(response) {
+          console.log(response);
+          showResult("You have tweeted!");
+          loadTweets((tweets) => {
+            $('#tweets-container').find('article').remove();
+            const $tweet = renderTweets(tweets);
+            $('#tweets-container').prepend($tweet);
+          });
+        },
+        error: function(xhr, status, error) {
+          console.log(error);
+        }
+      });
+    }
+  });
+
+  const showResult = function(message, err = false) {
+    const $errorMessage = err ? $('<p class="negative">').addClass('tweet-message').text(message) : $('<p>').addClass('tweet-message').text(message);
+    $('form').append($errorMessage);
+  };
+
+  const clearMessage = function() {
+    $('form').find('.tweet-message').remove();
+  };
+
   const createTweetElement = function(tweet) {
     const user = tweet.user;
     const content = tweet.content;
-    // const $article = $("<article>").addClass("tweet");
-    // const $header = $("<header>");
-    // const $avatar = $("<img>").addClass("avatar").attr("src", tweet.user.avatars);
-    // const $username = $("<span>").addClass("username").text(tweet.user.name);
-    // const $handle = $("<span>").addClass("handle").text(tweet.user.handle);
-    // const $content = $("<div>").addClass("content").text(tweet.content.text);
-    // const $footer = $("<footer>").text(new Date(tweet.created_at).toLocaleString());
-  
-    // $header.append($avatar, $username, $handle);
-    // $article.append($header, $content, $footer);
 
-    let $article =
-    `
+    let $article = `
     <article class="tweet">
-    <div id="header">
-      <img src="${user.avatars}" alt="Profile Picture">
-      <div class="user-info">
-        <h5>${user.name}</h5>
-        <span>${user.handle}</span>
+      <div id="header">
+        <img src="${user.avatars}" alt="Profile Picture">
+        <div class="user-info">
+          <h5>${user.name}</h5>
+          <span>${user.handle}</span>
+        </div>
       </div>
-    </div>
-    <div class="tweets-content">
-      <p>${content.text}</p>
-    </div>
-    <div id="footer">
-      <p>10 days ago</p>
-      <div id="icons">
-        <a href="#" class="like-icon"><i class="fa-solid fa-flag"></i></a>
-        <a href="#" class="retweet-icon"><i class="fas fa-retweet"></i></a>
-        <a href="#" class="comment-icon"><i class="fa-solid fa-heart"></i></a>
+      <div class="tweets-content">
+        <p>${content.text}</p>
       </div>
-    </div>
-  </article>     
-    `;
-  
+      <div id="footer">
+        <time class="timeago" datetime="${tweet.created_at}"></time>
+        <div id="icons">
+          <a href="#" class="like-icon"><i class="fa-solid fa-flag"></i></a>
+          <a href="#" class="retweet-icon"><i class="fas fa-retweet"></i></a>
+          <a href="#" class="comment-icon"><i class="fa-solid fa-heart"></i></a>
+        </div>
+      </div>
+    </article>`;
+
     return $article;
   };
 
   const renderTweets = function(tweets) {
-
     for (let tweet of tweets) {
       const $tweet = createTweetElement(tweet);
       $('#tweets-container').prepend($tweet);
-
     }
-    
+
+    $('time.timeago').each(function() {
+      $(this).text(timeago.format($(this).attr('datetime')));
+    });
   };
-  
-  
-  
-  const data = [
-    {
-      "user": {
-        "name": "Newton",
-        "avatars": "https://i.imgur.com/73hZDYK.png"
-        ,
-        "handle": "@SirIsaac"
-      },
-      "content": {
-        "text": "If I have seen further it is by standing on the shoulders of giants"
-      },
-      "created_at": 1461116232227
-    },
-    {
-      "user": {
-        "name": "Descartes",
-        "avatars": "https://i.imgur.com/nlhLi3I.png",
-        "handle": "@rd" },
-      "content": {
-        "text": "Je pense , donc je suis"
-      },
-      "created_at": 1461113959088
-    }
-  ];
-  
-  const $tweet = renderTweets(data);
-  console.log($tweet); // Displays the tweet element in the console
-  $('#tweets-container').prepend($tweet); // Adds the tweet element to the page
 
+  const loadTweets = function(callback) {
+    $.ajax({
+      url: '/tweets',
+      type: 'GET',
+      success: function(response) {
+        console.log(response);
+        callback(response);
+      },
+      error: function(xhr, status, error) {
+        console.log(error);
+      }
+    });
+  };
+
+  loadTweets((tweets) => {
+    const $tweet = renderTweets(tweets);
+    $('#tweets-container').prepend($tweet);
+  });
 });
-
