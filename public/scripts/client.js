@@ -1,5 +1,10 @@
 $(document).ready(() => {
   console.log("Ready");
+  $('#tweet-text').val('');
+
+  const clearTextBox = function() {
+    document.getElementById("tweet-text").value = "";
+  };
 
   const newTweetSection = $('.new-tweet');
   const arrowDownButton = $('#arrowDown');
@@ -42,6 +47,7 @@ $(document).ready(() => {
             $('#tweets-container').find('article').remove();
             const $tweet = renderTweets(tweets);
             $('#tweets-container').prepend($tweet);
+            $('#tweet-text').val('');
           });
         },
         error: function(xhr, status, error) {
