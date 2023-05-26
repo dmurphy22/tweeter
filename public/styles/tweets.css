@@ -37,9 +37,17 @@
 }
 
 .tweets-content {
+  display: flex;
+  flex-wrap: wrap;
   margin-bottom: 10px;
   border-bottom: 5px solid black;
   font-family: 'Source Sans Pro', sans-serif;
+  word-break: break-word;
+  overflow-wrap: break-word; 
+}
+
+.tweets-content p {
+  white-space: normal;
 }
 
 time {

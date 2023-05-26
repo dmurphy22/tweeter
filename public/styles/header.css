@@ -1,12 +1,42 @@
-header {
-  padding: 160px 0 0 0;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  background-color: mediumaquamarine;
-  background-image: url("https://www.transparenttextures.com/patterns/brick-wall-dark.png");
-  /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
+@media (min-width: 768px) {
+  #content {
+    display: flex;
+    justify-content: center;
+    padding: 160px 0 0 0;
 
+
+  }
+
+  header {
+    padding: 40px 0 0 0;
+    margin-left: 40px;
+    width: 500px;
+    display: flex;
+    height: 50%;
+    justify-content: center;
+    align-items: center;
+    justify-self: center;
+    flex-direction: column;
+    background-color: mediumaquamarine;
+    background-image: url("https://www.transparenttextures.com/patterns/brick-wall-dark.png");
+    /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
+
+
+  }
+
+}
+
+@media (max-width: 767px){
+  header {
+    padding: 160px 0 0 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: mediumaquamarine;
+    background-image: url("https://www.transparenttextures.com/patterns/brick-wall-dark.png");
+    /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
+  
+  }
 }
