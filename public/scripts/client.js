@@ -1,9 +1,16 @@
+const updateCharacterCount = function(selector) {
+  let text = $(selector).val();
+  let count = 140 - text.length;
+  $('.counter').text(count);
+  $('.counter').toggleClass('negative', count < 0);
+};
+
 $(document).ready(() => {
   console.log("Ready");
   $('#tweet-text').val('');
 
   const clearTextBox = function() {
-    document.getElementById("tweet-text").value = "";
+    $('#tweet-text').val('');
   };
 
   const newTweetSection = $('.new-tweet');
@@ -48,6 +55,7 @@ $(document).ready(() => {
             const $tweet = renderTweets(tweets);
             $('#tweets-container').prepend($tweet);
             $('#tweet-text').val('');
+            updateCharacterCount('#tweet-text');
           });
         },
         error: function(xhr, status, error) {

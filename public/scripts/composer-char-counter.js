@@ -10,10 +10,13 @@ $(document).ready(function() {
   $('.new-tweet textarea').on('input', function() {
     updateCharacterCount(this);
   });
+  
+  $('.new-tweet form').submit(function() {
+    updateCharacterCount('.new-tweet textarea');
+  });
 
   updateCharacterCount('.new-tweet textarea');
 
-  // JavaScript code for scroll-to-top button functionality
   let scrollToTopBtn = $('#scroll-to-top');
 
   $(window).scroll(function() {
