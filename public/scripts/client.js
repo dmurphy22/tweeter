@@ -1,6 +1,22 @@
 $(document).ready(() => {
   console.log("Ready");
 
+  const newTweetSection = $('.new-tweet');
+  const arrowDownButton = $('#arrowDown');
+  let isExpanded = false;
+
+  arrowDownButton.on('click', () => {
+    if (!isExpanded) {
+      newTweetSection.height(`${newTweetSection[0].scrollHeight}px`);
+      isExpanded = true;
+    } else {
+      newTweetSection.height('0px');
+      isExpanded = false;
+    }
+
+    arrowDownButton.toggleClass('rotate');
+  });
+
   $('form').submit(function(event) {
     event.preventDefault();
 
@@ -36,12 +52,20 @@ $(document).ready(() => {
   });
 
   const showResult = function(message, err = false) {
-    const $errorMessage = err ? $('<p>').addClass('tweet-message').addClass('err').text(message) : $('<p>').addClass('tweet-message').addClass('pos').text(message);
+    const $errorMessage = $('<p>')
+      .addClass('tweet-message')
+      .addClass(err ? 'err' : 'pos')
+      .text(message);
+    $errorMessage.hide();
     $('#feedback').append($errorMessage);
+    $errorMessage.fadeIn(500);
   };
 
   const clearMessage = function() {
-    $('form').find('.tweet-message').remove();
+    const $tweetMessages = $('#tweets').find('.tweet-message');
+    $tweetMessages.fadeOut(500, function() {
+      $(this).remove();
+    });
   };
 
   const escape = function(str) {

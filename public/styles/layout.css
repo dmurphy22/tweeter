@@ -35,3 +35,45 @@ body {
   background-color: inherit;
 }
 
+#scroll-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 999;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: red;
+  color: #fff;
+  text-align: center;
+  line-height: 80px;
+  cursor: pointer;
+  display: none;
+  transition: transform 0.3s ease;
+}
+
+#scroll-to-top:hover {
+  transform: scale(1.1); 
+}
+
+#scroll-to-top i {
+  line-height: 80px;
+  font-size: 24px;
+  transition: transform 0.3s ease;
+}
+
+#scroll-to-top:hover i {
+  animation: bounce 0.6s infinite; 
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0); 
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-6px);
+  }
+}

@@ -7,6 +7,7 @@
   margin: 20px auto;
 }
 
+
 .tweet:hover {
   box-shadow: 15px 15px 0px -5px rgba(203, 203, 203, 0.6);
 }
@@ -77,3 +78,26 @@ time {
 .comment-icon:hover {
   color: rgb(210, 156, 113);
 }
+
+.new-tweet {
+  overflow: hidden;
+  height: 0;
+  transition: height 0.5s;
+  z-index: 2;
+}
+
+#arrowDown {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  color: #999;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+#arrowDown.rotate {
+  transform: rotate(180deg);
+}
+
+

@@ -57,11 +57,13 @@ form button {
 
 .tweet-message{
   font-family: 'Source Sans Pro', sans-serif;
+  display: flex;
   padding: .5em 1em;
+  width: 90%;
+  margin: 20px auto;
 }
 
 .tweet-message.err{
-
   border: 5px solid red;
   color: red;
 
